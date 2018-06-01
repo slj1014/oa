@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="oa.domain.User">
+  <id length="10" name="id">
+  <generator class="increment"></generator>
+   </id>
+   <many-to-one name="department" class="oa.domain.Department" column="did"></many-to-one>
+   <set name="roles" table="user_role" lazy="false">
+      <key>
+         <column name="uid"></column>
+      </key>
+      <many-to-many class="oa.domain.Role" column="rid"></many-to-many>
+   </set>
+   <property name="loginName" length="45"></property>
+   <property name="password" length="45"></property>
+   <property name="name" length="45"></property>
+   <property name="gender" length="45"></property>
+   <property name="phoneNumber" length="45"></property>
+   <property name="email" length="45"></property>
+   <property name="description" length="45"></property>
+</class>
+</hibernate-mapping>

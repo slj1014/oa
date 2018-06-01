@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="oa.domain.Department">
+ <id name="id" length="10">
+   <generator class="increment"></generator>
+ </id>
+ <property name="name" length="45"></property>
+<property name="description" length="45"></property>
+<set name="users">
+  <key column="did"></key>
+  <one-to-many class="oa.domain.User"/>
+</set>
+<many-to-one name="parent" column="oid"></many-to-one>
+<set name="children" cascade="delete" order-by="id">
+<key column="oid"></key>
+  <one-to-many class="oa.domain.Department"/>
+</set>
+</class>
+</hibernate-mapping>

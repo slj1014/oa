@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="oa.domain.Role">
+ <id name="id" length="10">
+   <generator class="increment"></generator>
+ </id>
+ <property name="name" length="45"></property>
+<property name="description" length="45"></property>
+<set name="users" table="user_role">
+  <key column="rid"></key>
+  <many-to-many class="oa.domain.User" column="uid"></many-to-many>
+</set>
+<set name="privileges" table="role_privilege" lazy="false">
+  <key column="rid"></key>
+  <many-to-many class="oa.domain.Privilege" column="pid"></many-to-many>
+</set>
+</class>
+</hibernate-mapping>

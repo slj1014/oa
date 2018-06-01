@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="oa.domain.Topic">
+  <id name="id" length="10">
+    <generator class="increment"></generator>
+  </id>
+  		<property name="title"></property>
+		<!-- length表示文字的多少 -->
+		<property name="content" type="text" length="65535"></property>
+		<property name="faceIcon"></property>
+		<property name="postTime" type="timestamp"></property>
+		<property name="ipAddr"></property>
+		<many-to-one name="author" class="oa.domain.User" column="authorId"/>
+		<property name="type" length="10"></property>
+		<property name="replyCount" length="10"></property>
+		<property name="lastUpdateTime" type="timestamp"></property>
+		<!-- forum属性，多对一 -->
+		<many-to-one name="forum" class="oa.domain.Forum" column="forumId"></many-to-one>
+		<!-- replyies,一对多 -->
+		<set name="replies">
+		  <key column="topicId"></key>
+		  <one-to-many class="oa.domain.Reply"/>
+		</set>
+		<!-- lastReply属性，一多一 -->
+		<many-to-one name="lastReply" class="oa.domain.Reply" column="lastReplyId" unique="true"></many-to-one>
+</class>
+</hibernate-mapping>

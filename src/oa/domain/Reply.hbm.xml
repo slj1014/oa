@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="oa.domain.Reply">
+		<id name="id" length="10">
+			<generator class="increment"></generator>
+		</id>
+		<property name="title"></property>
+		<!-- length表示文字的多少 -->
+		<property name="content" type="text" length="65535"></property>
+		<property name="faceIcon"></property>
+		<property name="postTime" type="timestamp"></property>
+		<property name="ipAddr"></property>
+		<many-to-one name="author" class="oa.domain.User" column="authorId"/>
+		<many-to-one name="topic" class="oa.domain.Topic" column="topicId"></many-to-one>
+	</class>
+</hibernate-mapping>
